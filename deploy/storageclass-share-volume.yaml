@@ -14,7 +14,7 @@ parameters:
   # Resource manager IP address or URL
   masterAddr: "sparkchubaofs.jd.local"
   # Consul Service IP address or URL
-  consulAddr: "consul-service.chubaofs.svc.cluster.local:8500"
+  consulAddr: "cbconsul-cfs01.cbmonitor.svc.ht7.n.jd.local"
   # Owner name as authentication
   owner: "csiuser"
   # Log level：debug, info, warn, error
