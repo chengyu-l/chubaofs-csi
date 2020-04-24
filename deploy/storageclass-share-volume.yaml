@@ -12,7 +12,7 @@ parameters:
   # volName regex pattern: "^[a-zA-Z0-9_-]{3,256}$"
   volName: "share_volume"
   # Resource manager IP address or URL
-  masterAddr: "master-service.chubaofs.svc.cluster.local:17010"
+  masterAddr: "sparkchubaofs.jd.local"
   # Consul Service IP address or URL
   consulAddr: "consul-service.chubaofs.svc.cluster.local:8500"
   # Owner name as authentication

@@ -19,7 +19,7 @@ spec:
         - name: registry-key
       containers:
         - name: cfs-csi-demo
-          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/nginx:1.17.9
+          image: is.ht1.n.jd.local/chubaofs35/nginx:1.17.9
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 80
