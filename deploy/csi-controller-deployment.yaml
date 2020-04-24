@@ -20,7 +20,7 @@ spec:
         - name: registry-key
       containers:
         - name: external-provisioner
-          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/csi-provisioner:v0.4.2
+          image: is.ht1.n.jd.local/chubaofs35/csi-provisioner:v0.4.2
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -45,7 +45,7 @@ spec:
             - name: kube-config
               mountPath: /etc/kubernetes
         - name: external-attacher
-          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/csi-attacher:v0.4.2
+          image: is.ht1.n.jd.local/chubaofs35/csi-attacher:v0.4.2
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -66,7 +66,7 @@ spec:
             - name: kube-config
               mountPath: /etc/kubernetes
         - name: cfs-driver
-          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/cfs-csi-driver:2.0.9
+          image: is.ht1.n.jd.local/chubaofs35/cfs-csi-driver:2.0.9
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
