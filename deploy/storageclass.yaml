@@ -19,7 +19,7 @@ parameters:
   owner: "csiuser"
   crossZone: "false"
   enableToken: "false"
-  zoneName: ""
+  zoneName: "jcloud_zyx"
 
   # Log level：debug, info, warn, error
   logLevel: "info"
