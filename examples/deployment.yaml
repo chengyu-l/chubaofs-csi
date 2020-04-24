@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cfs-csi-demo
-  namespace: default
+  namespace: chubaofs
 spec:
   replicas: 1
   selector:
@@ -14,12 +14,12 @@ spec:
         app: cfs-csi-demo-pod
     spec:
       nodeSelector:
-        csi.chubaofs.com/demo: enable
-#      imagePullSecrets:
-#        - name: registry-key
+        jdos.jd.com/zone=default_g.n1jd.15xlarge_m
+      imagePullSecrets:
+        - name: registry-key
       containers:
         - name: cfs-csi-demo
-          image: nginx:1.17.9
+          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/nginx:1.17.9
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 80

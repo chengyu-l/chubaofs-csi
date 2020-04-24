@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cfs-pvc-share-volume
-  namespace: default
+  namespace: chubaofs
 spec:
   accessModes:
   - ReadWriteMany

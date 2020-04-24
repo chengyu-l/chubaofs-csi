@@ -2,7 +2,7 @@ kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: cfs-csi-node
-  namespace: default
+  namespace: chubaofs
 spec:
   selector:
     matchLabels:
@@ -14,10 +14,12 @@ spec:
     spec:
       serviceAccount: cfs-csi-service-account
       nodeSelector:
-        csi.chubaofs.com/node: enabled
+        jdos.jd.com/zone=default_g.n1jd.15xlarge_m
+      imagePullSecrets:
+        - name: registry-key
       containers:
         - name: driver-registrar
-          image: quay.io/k8scsi/driver-registrar:v0.4.2
+          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/driver-registrar:v0.4.2
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -28,9 +30,9 @@ spec:
             - --kubeconfig=/etc/kubernetes/config
           env:
             - name: ADDRESS
-              value: /var/lib/kubelet/plugins/csi.chubaofs.com/csi.sock
+              value: /export/kubelet/plugins/csi.chubaofs.com/csi.sock
             - name: DRIVER_REG_SOCK_PATH
-              value: /var/lib/kubelet/plugins/csi.chubaofs.com/csi.sock
+              value: /export/kubelet/plugins/csi.chubaofs.com/csi.sock
             - name: KUBE_NODE_NAME
               valueFrom:
                 fieldRef:
@@ -41,14 +43,14 @@ spec:
               cpu: 200m
               memory: 256Mi
           volumeMounts:
-            - mountPath: /var/lib/kubelet/plugins/csi.chubaofs.com
+            - mountPath: /export/kubelet/plugins/csi.chubaofs.com
               name: socket-dir
             - mountPath: /registration
               name: registration-dir
             - name: kube-config
               mountPath: /etc/kubernetes
         - name: cfs-driver
-          image: chubaofs/cfs-csi-driver:2.0.9
+          image: ishc.harbor.svc.hcyf.n.jd.local/chubaofs35/cfs-csi-driver:2.0.9
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -67,7 +69,7 @@ spec:
             - name: LOG_LEVEL
               value: "5"
             - name: CSI_ENDPOINT
-              value: unix:///var/lib/kubelet/plugins/csi.chubaofs.com/csi.sock
+              value: unix:///export/kubelet/plugins/csi.chubaofs.com/csi.sock
             - name: DRIVER_NAME
               value: csi.chubaofs.com
             - name: KUBE_NODE_NAME
@@ -80,24 +82,24 @@ spec:
               cpu: 1000m
               memory: 2Gi
           volumeMounts:
-            - mountPath: /var/lib/kubelet/plugins/csi.chubaofs.com
+            - mountPath: /export/kubelet/plugins/csi.chubaofs.com
               name: socket-dir
-            - mountPath: /var/lib/kubelet/pods
+            - mountPath: /export/kubelet/pods
               mountPropagation: Bidirectional
               name: mountpoint-dir
             - name: kube-config
               mountPath: /etc/kubernetes
       volumes:
         - hostPath:
-            path: /var/lib/kubelet/plugins/csi.chubaofs.com
+            path: /export/kubelet/plugins/csi.chubaofs.com
             type: DirectoryOrCreate
           name: socket-dir
         - hostPath:
-            path: /var/lib/kubelet/plugins/
+            path: /export/kubelet/plugins/
             type: Directory
           name: registration-dir
         - hostPath:
-            path: /var/lib/kubelet/pods
+            path: /export/kubelet/pods
             type: Directory
           name: mountpoint-dir
         - configMap:
