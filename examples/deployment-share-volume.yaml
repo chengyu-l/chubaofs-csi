@@ -14,7 +14,7 @@ spec:
         app: cfs-csi-demo-pod
     spec:
       nodeSelector:
-        jdos.jd.com/zone=default_g.n1jd.15xlarge_m
+        jdos.jd.com/zone: default_g.n1jd.15xlarge_m
       imagePullSecrets:
         - name: registry-key
       containers:

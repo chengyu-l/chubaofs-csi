@@ -15,7 +15,7 @@ spec:
     spec:
       serviceAccount: cfs-csi-service-account
       nodeSelector:
-        jdos.jd.com/zone=default_g.n1jd.15xlarge_m
+        jdos.jd.com/zone: default_g.n1jd.15xlarge_m
       imagePullSecrets:
         - name: registry-key
       containers:
